@@ -6,19 +6,20 @@
                 <h1 class="text-xl font-bold leading-tight text-center text-gray-700">
                     Welcome back!
                 </h1>
-                <p id="errorMessage" class="text-sm text-center text-pink-500 hidden">Wrong email or password, try again.</p>
-                <form class="space-y-4">
+                <p id="errorMessage" class="text-sm text-center text-pink-500 hidden">Wrong email or password, please try again.</p>
+                <!-- Sign In Form -->
+                <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()" class="space-y-4">
                     <!-- Email or Username-->
                     <div>
                         <label for="email" class="block mb-2 text-sm text-gray-800">Email</label>
                         <input type="email" id="email" class="bg-gray-50 rounded border w-full p-2 text-gray-800"
-                        placeholder="Enter your email">
+                        placeholder="Enter your email" formControlName="emailInput">
                     </div>
                     <!-- Password -->
                     <div>
                         <label for="password" class="block mb-2 text-sm text-gray-800">Password</label>
                         <input type="password" id="password" class="bg-gray-50 rounded border w-full p-2 text-gray-800"
-                        placeholder="Enter your password">
+                        placeholder="Enter your password" formControlName="passwordInput">
                         
                     </div>
                     <!-- Button -->
