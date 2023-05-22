@@ -10,13 +10,14 @@ import { Router } from '@angular/router';
 export class SignInComponent implements OnInit{
 
   str:string = ""
+  isSubmitted:boolean = false
 
   // Form Group
   credentialsForm = this.fb.group({
     
-    emailInput: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
 
-    passwordInput: ['']
+    password: ['', Validators.required]
   })
   
   constructor(
@@ -39,6 +40,22 @@ export class SignInComponent implements OnInit{
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
-    console.log('Credentals: ', this.credentialsForm.value);
+    console.log('Credentals: ', this.credentialsForm.value, this.credentialsForm.invalid)
+
+    this.isSubmitted = true
+
+    /* [class.invalid:border-red-500]="credentialsForm.get('email')?.invalid && 
+                        (credentialsForm.get('email')?.dirty || credentialsForm.get('email')?.touched)" */
   }
+
+  // Method to validate if Email was typed correctly
+  validate(input:string):boolean {
+
+    return (
+      (this.credentialsForm.get(input)?.invalid && 
+      (this.credentialsForm.get(input)?.dirty || this.credentialsForm.get(input)?.touched || this.isSubmitted) && 
+      this.isSubmitted) ? true : false
+    )
+  }
+
 }
