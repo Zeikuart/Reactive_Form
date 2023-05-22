@@ -17,8 +17,6 @@
                         [class.border-red-500]="validate('email')">
                         <!-- Invalid Email Message -->
                         <span *ngIf="validate('email')" class="text-sm text-red-500">Please enter a valid email.</span>
-                        <!-- <span *ngIf="credentialsForm.get('email')?.invalid && 
-                        (credentialsForm.get('email')?.dirty || credentialsForm.get('email')?.touched || isSubmitted) && isSubmitted" class="text-sm text-red-500">This field cannot be empty.</span> -->
                     </div>
                     <!-- Password -->
                     <div>
@@ -31,12 +29,9 @@
                     </div>
                     <!-- Button -->
                     <button type="submit" class="w-full text-white bg-gray-700 p-2 rounded-md disabled cursor-not-allowed disabled:opacity-75" 
-                    [disabled]="credentialsForm.get('password')?.invalid && 
-                    (credentialsForm.get('password')?.dirty || credentialsForm.get('password')?.touched || isSubmitted) && isSubmitted"
-                    [class.hover:bg-gray-800]="!(credentialsForm.get('password')?.invalid && 
-                    (credentialsForm.get('password')?.dirty || credentialsForm.get('password')?.touched || isSubmitted) && isSubmitted)"
-                    [class.cursor-not-allowed]="credentialsForm.get('password')?.invalid && 
-                    (credentialsForm.get('password')?.dirty || credentialsForm.get('password')?.touched || isSubmitted) && isSubmitted">Sign in</button>
+                    [disabled]="(validate('email') || validate('password'))"
+                    [class.hover:bg-gray-800]="!(validate('email') || validate('password'))"
+                    [class.cursor-not-allowed]="(validate('email') || validate('password'))">Sign in</button>
                 </form>
             </div>
         </div>

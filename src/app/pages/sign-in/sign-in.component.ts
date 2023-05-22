@@ -39,13 +39,10 @@ export class SignInComponent implements OnInit{
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
+
     console.log('Credentals: ', this.credentialsForm.value, this.credentialsForm.invalid)
 
     this.isSubmitted = true
-
-    /* [class.invalid:border-red-500]="credentialsForm.get('email')?.invalid && 
-                        (credentialsForm.get('email')?.dirty || credentialsForm.get('email')?.touched)" */
   }
 
   // Method to validate if Email was typed correctly
