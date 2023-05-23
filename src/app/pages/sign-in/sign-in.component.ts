@@ -11,12 +11,12 @@ export class SignInComponent implements OnInit{
 
   str:string = ""
   isSubmitted:boolean = false
+  success:boolean = true
 
   // Form Group
   credentialsForm = this.fb.group({
     
     email: ['', [Validators.required, Validators.email]],
-
     password: ['', Validators.required]
   })
   
@@ -27,22 +27,30 @@ export class SignInComponent implements OnInit{
 
   ngOnInit(): void {
     
-    // this.test()
-  }
-  
-  // Error Message Trigger
-  test() {
-    
-    const element = document.getElementById("errorMessage");
-    element?.classList.remove("hidden");
-    element?.classList.add("block");
   }
 
+  // Submit Button
   onSubmit() {
 
-    console.log('Credentals: ', this.credentialsForm.value, this.credentialsForm.invalid)
-
+    console.log('Credentals: ', this.credentialsForm.value, 'Valid: ', this.credentialsForm.invalid)
+    this.success = true
     this.isSubmitted = true
+
+    // Getting email and password from the form
+    let email = this.credentialsForm.get('email')?.value
+    let password = this.credentialsForm.get('password')?.value
+
+    /* if(!(this.validate('email') && this.validate('password')) && (email === 'hi@gmail.com' && password === 'asdasd')){this.router.navigate(['dashboard'])}
+    else{this.success = false} */
+
+    // Simple validation without API
+    if(!(this.validate('email') && this.validate('password'))){
+      if(email === 'hi@gmail.com' && password === 'asdasd'){
+        this.router.navigate(['dashboard'])
+      }
+      // Error Message Trigger
+      else{this.success = false}
+    }
   }
 
   // Method to validate if Email was typed correctly
