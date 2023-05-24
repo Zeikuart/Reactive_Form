@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit{
 
-  str:string = ""
   isSubmitted:boolean = false
   success:boolean = true
 
@@ -20,14 +19,9 @@ export class SignInComponent implements OnInit{
     password: ['', Validators.required]
   })
   
-  constructor(
-    private router: Router,
-    private fb: FormBuilder
-    ){}
+  constructor(private router: Router, private fb: FormBuilder){}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   // Submit Button
   onSubmit() {
@@ -40,20 +34,18 @@ export class SignInComponent implements OnInit{
     let email = this.credentialsForm.get('email')?.value
     let password = this.credentialsForm.get('password')?.value
 
-    /* if(!(this.validate('email') && this.validate('password')) && (email === 'hi@gmail.com' && password === 'asdasd')){this.router.navigate(['dashboard'])}
-    else{this.success = false} */
-
-    // Simple validation without API
-    if(!(this.validate('email') && this.validate('password'))){
-      if(email === 'hi@gmail.com' && password === 'asdasd'){
-        this.router.navigate(['dashboard'])
-      }
-      // Error Message Trigger
-      else{this.success = false}
+    if (this.validate('email') && this.validate('password'))
+      return
+    // Error Message Trigger
+    if (!(email === 'hi@gmail.com' && password === 'asdasd')){
+      this.success = false
+      return
     }
+    // Navigation
+    this.router.navigate(['dashboard'])
   }
 
-  // Method to validate if Email was typed correctly
+  // Method to validate if Email or Password was typed correctly
   validate(input:string):boolean {
 
     return (
